@@ -59,7 +59,7 @@
                     <!-- Nav items -->
                        
                     <ul class="navbar-nav">
-                        @guest
+                        
                             
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
@@ -68,7 +68,7 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
-                        @endguest
+                    
                     
                      @auth
                             

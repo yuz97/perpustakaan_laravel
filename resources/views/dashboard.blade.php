@@ -104,11 +104,21 @@
                 <div class="chart">
                   <!-- Chart wrapper -->
                   <canvas id="myChart" class="chart-canvas"></canvas>
+                  @php
+                      $trans = '';
+                      $jumlah = null;
+
+                      foreach ($transaksi_pinjam as $item) {
+
+                        // echo $item->status;
+                      
+                      }
+                  @endphp
                 </div>
               </div>
             </div>
           </div>
-          {{-- <div class="col-xl-4">
+          <div class="col-xl-4">
             <div class="card">
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
@@ -136,11 +146,10 @@
                       }
                   @endphp 
                  
-                 
                 </div>
               </div>
             </div>
-          </div> --}}
+          </div>
         </div>
    
    
@@ -190,10 +199,10 @@
     // Get context with jQuery - using jQuery's .get() method.
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var donutData        = {
-    labels: ['@php $jk; @endphp'],
+    labels: [@php echo $jk; @endphp],
       datasets: [
         {
-          data:  ['@php $jumlah; @endphp'],
+          data:  [@php echo $jumlah; @endphp],
           backgroundColor : [ '#5e72e4','#f63f55', ],
         }
       ]
