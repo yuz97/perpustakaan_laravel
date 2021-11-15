@@ -171,7 +171,8 @@
 
 @push('script')
     <script>
-
+    
+     
       //setup block
       const data = {
         labels: [@php echo $trans; @endphp],
@@ -181,7 +182,7 @@
           data: [
             @php  echo $jumlah_trans; @endphp
           ],
-          backgroundColor: 'rgb(255, 99, 132)',
+          backgroundColor: ['#2dce89','#f5365c'],
           borderColor: 'rgb(255, 99, 132)'
         }]
       };
