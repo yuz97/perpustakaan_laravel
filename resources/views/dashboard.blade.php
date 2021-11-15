@@ -108,7 +108,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-4">
+          {{-- <div class="col-xl-4">
             <div class="card">
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
@@ -122,10 +122,25 @@
                 <!-- Chart -->
                 <div class="chart">
                   <canvas id="donutChart" class="chart-canvas"></canvas>
+                  @php
+                      $jk = "";
+                      $jumlah = null;
+
+                      foreach ($jenis_kelamin as $item) {
+                        
+                        $jenis = $item->jenis_kelamin;
+                        $jk .= "'$jenis'".",";
+
+                        $tot = $item->total;
+                        $jumlah .= "'$tot'".",";
+                      }
+                  @endphp 
+                 
+                 
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
    
    
@@ -175,10 +190,10 @@
     // Get context with jQuery - using jQuery's .get() method.
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var donutData        = {
-    labels: ['pria','wanita'],
+    labels: ['@php $jk; @endphp'],
       datasets: [
         {
-          data:  ['{{ $priaTot }}','{{ $wanitaTot }}'],
+          data:  ['@php $jumlah; @endphp'],
           backgroundColor : [ '#5e72e4','#f63f55', ],
         }
       ]
