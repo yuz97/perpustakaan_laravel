@@ -23,44 +23,32 @@
     {{-- material dsign --}}
     <link rel="stylesheet" href="{{ asset('materialdesignicons.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}"> --}}
-    <style type='text/css'> 
-        /* preloader */
-        .preloader:before,.preloader:after,.preloader{border-radius:50%;width:2.5em;height:2.5em;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 1.8s infinite ease-in-out;animation:load7 1.8s infinite ease-in-out}
-        .preloader{font-size:10px;margin:80px auto;position:fixed;z-index:1000;top:35%;left:55%;text-indent:-9999em;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.16s;animation-delay:-0.16s}
-        .preloader:before{left:-3.5em;-webkit-animation-delay:-0.32s;animation-delay:-0.32s}
-        .preloader:after{left:3.5em}
-        .preloader:before,.preloader:after{content:&#39;&#39;;position:absolute;top:0}
-        @media(max-width:768px){.preloader{top:32%;left:55%}}@keyframes spin{0%{transform: rotate(0deg);}100% {transform:rotate(360deg);}}
-        @-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2.5em 0 -1.3em #fff}40%{box-shadow:0 2.5em 0 0 #fff}}
-        @keyframes load7{0%,80%,100%{box-shadow:0 2.5em 0 -1.3em #fff}40%{box-shadow:0 2.5em 0 0 #c5ffef}}
-        </style>
-       
-</head>
-
-
-<body>
-
    
-     {{-- preloader --}}
-     {{-- <div class="preloader"></div> --}}
-   
-    <!-- Sidenav -->
-    <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-        <div class="scrollbar-inner">
-            <!-- Brand -->
-            <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
-                    <img src="{{ asset('template') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
-                </a>
-            </div>
-            <div class="navbar-inner">
-                <!-- Collapse -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+
+    <body>
+        
+        
+    
+        <!-- Sidenav -->
+        <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+            <div class="scrollbar-inner">
+                <!-- Brand -->
+                <div class="sidenav-header  align-items-center">
+                    <a class="navbar-brand" href="javascript:void(0)">
+                        <img src="{{ asset('template') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                    </a>
+                </div>
+                <div class="navbar-inner">
+                    <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
-                       
+                    
                     <ul class="navbar-nav">
                         
-                            
+                        
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                                 href="{{ route('dashboard') }}">
@@ -68,10 +56,10 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
+                        
                     
-                    
-                     @auth
-                            
+                        @auth
+                        
                         @if (Auth::user()->level == 'admin')  
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}"
@@ -112,9 +100,9 @@
                             </a>
                         </li>
                         @endif
-                     @endauth
+                        @endauth
                     </ul>
-                   
+                    
                 </div>
             </div>
         </div>
@@ -127,14 +115,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   
                     @auth
-                        <ul class="navbar-nav align-items-center ml-md-auto ">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    <ul class="navbar-nav align-items-center ml-md-auto ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     <div class="media align-items-center">
                                         <span class="avatar avatar-sm rounded-circle">
                                             <img alt="Image placeholder"
-                                                src="{{ asset('template') }}/img/theme/team-4.jpg">
+                                            src="{{ asset('template') }}/img/theme/team-4.jpg">
                                         </span>
                                         <div class="media-body  ml-2  d-none d-lg-block">
                                             <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
@@ -151,11 +139,11 @@
                                     
                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                                    onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();">
                                             <i class="ni ni-bold-right"></i> <span>{{ __('Logout') }}</span>
-                                    </a>
-        
+                                        </a>
+                                        
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -176,11 +164,11 @@
                     @yield('content')
                     @yield('modal')
                 </div>
-
+                
                 
             </div>
         </div>
-      
+        
         
     </div>
     
@@ -196,21 +184,13 @@
     <script src="{{ asset('template') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <!-- Argon JS -->
     <script src="{{ asset('template') }}/js/argon.js?v=1.2.0"></script>
-
+    
     {{-- sweet alert  --}}
     <script src="{{ asset('sweetalert2.min.js') }}"></script>
     <script src="{{ asset('popper.js') }}"></script>
     <script src="{{ asset('jquery.js') }}"></script>
-   
-    <script>
-        $(document).ready(function(){
-            $(window).on('load',function () {
-            
-                $(".preloader").fadeOut(200);  
-            })
-        })
-       
-    </script>
+    <script src="{{ asset('moment.js') }}"></script>    
+
     @stack('script')
 </body>
 

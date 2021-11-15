@@ -95,7 +95,7 @@
                     <h5 class="h3 text-white mb-0">Transaksi</h5>
                   </div>
                   <div class="col">
-                   
+                  
                   </div>
                 </div>
               </div>
@@ -103,21 +103,33 @@
                 <!-- Chart -->
                 <div class="chart">
                   <!-- Chart wrapper -->
-                  <canvas id="myChart" class="chart-canvas"></canvas>
+            
+                  <canvas id="myChart" class="chart-canvas chartjs-render-monitor"></canvas>
                   @php
                       $trans = '';
-                      $jumlah = null;
+                      $jumlah_trans = null;
 
                       foreach ($transaksi_pinjam as $item) {
 
-                        // echo $item->status;
+                        //status 
+                        $status = $item->status;
+                        $trans .= "'$status'".",";
+                        //total
+                        $total =  $item->total;
+                        $jumlah_trans .="'$total'".",";
+                        
                       
                       }
+                    
                   @endphp
+                  
                 </div>
+               
               </div>
+              
             </div>
           </div>
+         
           <div class="col-xl-4">
             <div class="card">
               <div class="card-header bg-transparent">
@@ -128,6 +140,7 @@
                   </div>
                 </div>
               </div>
+              
               <div class="card-body">
                 <!-- Chart -->
                 <div class="chart">
@@ -158,37 +171,52 @@
 
 @push('script')
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-        type: 'bar',
-    data: {
-        labels: ['buku','anggota','transaksi','riwayat'],
+
+      //setup block
+      const data = {
+        labels: [@php echo $trans; @endphp],
         datasets: [{
-            label: 'jumlah',
-            data: ['{{ $buku }}','{{ $anggota }}','{{ $transaksi }}','{{ $riwayat }}'],
-            backgroundColor: [
-                '#2dce89',
-                '#fb9a40',
-                '#f63f55',
-                '#9365e0'
-            ],
-            borderColor: [
-            //    '#f9fafa',
-            //    '#faebd5',
-            //    '#f65f38',
-            //    '#b965e0'
-            ],
-            borderWidth: 1
+
+          label: 'jumlah',
+          data: [
+            @php  echo $jumlah_trans; @endphp
+          ],
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)'
         }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+      };
+      
+  
+        
+      //config block
+        const config ={
+          type: 'bar',
+          data,
+          options: {
+              scales: {
+                  x:{
+                    parsing:false,
+                    type:'time',
+                    time:{
+                     
+                      unit:'day',
+                    }
+                  },
+                  y: {
+                      beginAtZero: true
+                  }
+                
+              }
+          }
         }
-    }
-});
+
+      //render /init block
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+       
 
 
 

@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         //chart berdasarkan pinjam dan kembali
         $transaksi_pinjam = Transaksi::withTrashed()->groupBy('status')->select('status',DB::raw('count(*) as total'))->get();
-
+    
 
         $data = [
            'buku' =>  Buku::count(),
