@@ -66,7 +66,8 @@ class TransaksiController extends Controller
             return redirect('transaksi');
             exit;
         }
-        Transaksi::create([
+
+        $transaksi = Transaksi::create([
 
             'anggota_id' => $anggota_id,
             'kode_transaksi' => Str::random(10),
@@ -77,6 +78,9 @@ class TransaksiController extends Controller
             'ket' => $request->ket,
             'user_id' => Auth::user()->id
         ]);
+
+        //jika transaksi dilakukan maka stock buku akan berkurang 
+        $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku -1]);
         return redirect('transaksi')->with('success','transaksi anda berhasil!');
     }
 
@@ -138,6 +142,9 @@ class TransaksiController extends Controller
             'ket' => $request->ket ?? $transaksi->ket,
             'user_id' => Auth::user()->id
         ]);
+
+          //jika transaksi dilakukan maka stock buku akan berkurang 
+          $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku +1]);
 
         return redirect('transaksi')->with('success','transaksi berhasil diupdate');
     }

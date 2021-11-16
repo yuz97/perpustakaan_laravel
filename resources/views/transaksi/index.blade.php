@@ -9,7 +9,7 @@
             <!-- Search form -->
             <form  action="{{ route('transaksi.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
 
-              <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
+              <input type="text" placeholder="masukkan kode transaksi" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
              <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
   
           </form>
@@ -88,15 +88,20 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <button class="dropdown-item btn-detail" data-target="#detailTransaksi" data-toggle="modal" data-id="{{ $item->id }}" >Detail</button>
 
-                                                    <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editTransaksi" data-id="{{ $item->id }}">Edit</button>
-                                
-                                                    <form action="{{ route('transaksi.destroy', $item->id) }}" method="post"
-                                                        id="delete{{ $item->id }}">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="dropdown-item" type="button"
-                                                            onclick="deleteTransaksi({{ $item->id}})">Hapus</button>
-                                                    </form>
+                                                    @if ($item->status == 'pinjam')  
+                                                        <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editTransaksi" data-id="{{ $item->id }}">Edit</button>
+                                                    @endif
+                                                    
+                                                    @if($item->status == 'kembali')
+                                                    
+                                                        <form action="{{ route('transaksi.destroy', $item->id) }}" method="post"
+                                                            id="delete{{ $item->id }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                                <button class="dropdown-item" type="button"
+                                                                onclick="deleteTransaksi({{ $item->id}})">Hapus</button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>
